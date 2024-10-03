@@ -1,7 +1,7 @@
 import requests
 
 def test_diabetes_api():
-    url =      #"http://127.0.0.1:5000/api/diabetes"
+    url = "http://127.0.0.1:5000/api/diabetes"
     data = {
         "pregnancies": 6,
         "glucose": 148,

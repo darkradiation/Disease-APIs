@@ -13,8 +13,7 @@ breast_cancer_model = joblib.load("models/breast_cancer_prediction_adb.sav") # r
 hepatitis_model = joblib.load("models/hepatitis_c_prediction_xgb.sav") # recall --> 0.958
 parkinson_model = joblib.load("models/parkinsons_disease_prediction_rf.sav")  # recall--> 1.00
 liver_model = joblib.load("models/liver_disease_prediction_svm.sav")  # recall--> 1.00
-# chronic_kidney_disease_model = joblib.load("models/chronic_kidney_disease_prediction_rf.sav") # recall--> 1.00
-chronic_kidney_disease_model = joblib.load("models/chronic_kidney_disease_prediction_adb.sav") # recall--> 1.00
+chronic_kidney_disease_model = joblib.load("models/chronic_kidney_disease_prediction_rf.sav") # recall--> 1.00
 lung_cancer_model = joblib.load("models/lung_cancer_prediction_xgb.sav") # recall--> 1.00
 
 

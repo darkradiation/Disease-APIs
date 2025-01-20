@@ -7,21 +7,16 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Load all the pre-trained models
+diabetes_model = joblib.load("models/diabetes_prediction_decision_tree.sav")  # recall --> 0.709
+heart_model = joblib.load("models/heart_disease_prediction_svm.sav")  # recall --> 0.875
+breast_cancer_model = joblib.load("models/breast_cancer_prediction_adb.sav") # recall --> 0.953
+hepatitis_model = joblib.load("models/hepatitis_c_prediction_xgb.sav") # recall --> 0.958
+parkinson_model = joblib.load("models/parkinsons_disease_prediction_rf.sav")  # recall--> 1.00
+liver_model = joblib.load("models/liver_disease_prediction_svm.sav")  # recall--> 1.00
+chronic_kidney_disease_model = joblib.load("models/chronic_kidney_disease_prediction_rf.sav") # recall--> 1.00
+lung_cancer_model = joblib.load("models/lung_cancer_prediction_xgb.sav") # recall--> 1.00
 
-### old models
-# diabetes_model = joblib.load("models/diabetes_model.sav")
-# heart_model = joblib.load("models/heart_disease_model.sav")
-# parkinson_model = joblib.load("models/parkinsons_model.sav")
-lung_cancer_model = joblib.load("models/lung_cancer_model.sav")
-breast_cancer_model = joblib.load("models/breast_cancer.sav")
-chronic_disease_model = joblib.load("models/chronic_model.sav")
-hepatitis_model = joblib.load("models/hepititisc_model.sav")
-liver_model = joblib.load("models/liver_model.sav")
 
-### new models
-diabetes_model = joblib.load("models/diabetes_prediction_decision_tree.sav")
-heart_model = joblib.load("models/heart_disease_prediction_svm.sav")
-parkinson_model = joblib.load("models/parkinsons_disease_prediction_rf.sav")
 
 @app.route('/api/diabetes', methods=['POST'])
 def predict_diabetes():
@@ -127,27 +122,27 @@ def predict_parkinson():
 def predict_lung_cancer():
     try:
         data = request.json
-        required_fields = ['GENDER', 'AGE', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY', 'PEER_PRESSURE', 'CHRONICDISEASE', 'FATIGUE', 'ALLERGY', 'WHEEZING', 'ALCOHOLCONSUMING', 'COUGHING', 'SHORTNESSOFBREATH', 'SWALLOWINGDIFFICULTY', 'CHESTPAIN']
+        required_fields = ['Gender', 'Age', 'Smoking', 'Yellow_Fingers', 'Anxiety', 'Peer_Pressure', 'Chronic_Disease', 'Fatigue', 'Allergy', 'Wheezing', 'Alcohol_Consuming', 'Coughing', 'Shortness_Of_Breath', 'Swallowing_Difficulty', 'Chest_Pain']
         for field in required_fields:
             if field not in data:
                 return jsonify({'error': f'Missing field: {field}'}), 400
 
         input_data = [
-            data['GENDER'],
-            data['AGE'],
-            data['SMOKING'],
-            data['YELLOW_FINGERS'],
-            data['ANXIETY'],
-            data['PEER_PRESSURE'],
-            data['CHRONIC DISEASE'],
-            data['FATIGUE'],
-            data['ALLERGY'],
-            data['WHEEZING'],
-            data['ALCOHOL CONSUMING'],
-            data['COUGHING'],
-            data['SHORTNESS OF BREATH'],
-            data['SWALLOWING DIFFICULTY'],
-            data['CHEST PAIN']
+            data['Gender'],
+            data['Age'],
+            data['Smoking'],
+            data['Yellow_Fingers'],
+            data['Anxiety'],
+            data['Peer_Pressure'],
+            data['Chronic_Disease'],
+            data['Fatigue'],
+            data['Allergy'],
+            data['Wheezing'],
+            data['Alcohol_Consuming'],
+            data['Coughing'],
+            data['Shortness_Of_Breath'],
+            data['Swallowing_Difficulty'],
+            data['Chest_Pain']
         ]
 
         prediction = lung_cancer_model.predict([input_data])
@@ -210,39 +205,28 @@ def predict_breast_cancer():
 def predict_chronic_kidney():
     try:
         data = request.json
-        required_fields = ['age', 'bp', 'sg', 'al', 'su', 'rbc', 'pc', 'pcc', 'ba', 'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo', 'pcv', 'wc', 'rc', 'htn', 'dm', 'cad', 'appet', 'pe', 'ane']
+        required_fields = ['Bp', 'Sg', 'Al', 'Su', 'Rbc', 'Bu', 'Sc', 'Sod', 'Pot', 'Hemo', 'Wbcc', 'Rbcc', 'Htn']
         for field in required_fields:
             if field not in data:
                 return jsonify({'error': f'Missing field: {field}'}), 400
 
         input_data = [
-            data['age'],
-            data['bp'],
-            data['sg'],
-            data['al'],
-            data['su'],
-            data['rbc'],
-            data['pc'],
-            data['pcc'],
-            data['ba'],
-            data['bgr'],
-            data['bu'],
-            data['sc'],
-            data['sod'],
-            data['pot'],
-            data['hemo'],
-            data['pcv'],
-            data['wc'],
-            data['rc'],
-            data['htn'],
-            data['dm'],
-            data['cad'],
-            data['appet'],
-            data['pe'],
-            data['ane']
+            data['Bp'],
+            data['Sg'],
+            data['Al'],
+            data['Su'],
+            data['Rbc'],
+            data['Bu'],
+            data['Sc'],
+            data['Sod'],
+            data['Pot'],
+            data['Hemo'],
+            data['Wbcc'],
+            data['Rbcc'],
+            data['Htn']
         ]
 
-        prediction = chronic_disease_model.predict([input_data])
+        prediction = chronic_kidney_disease_model.predict([input_data])
         result = "Chronic Kidney Disease" if prediction[0] == 1 else "No Chronic Kidney Disease"
         return jsonify({'result': result})
 

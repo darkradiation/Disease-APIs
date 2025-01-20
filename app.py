@@ -7,15 +7,21 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Load all the pre-trained models
-diabetes_model = joblib.load("models/diabetes_model.sav")
-# diabetes_model = joblib.load("models/diabetes_prediction_decision_tree.sav")
-heart_model = joblib.load("models/heart_disease_model.sav")
-parkinson_model = joblib.load("models/parkinsons_model.sav")
+
+### old models
+# diabetes_model = joblib.load("models/diabetes_model.sav")
+# heart_model = joblib.load("models/heart_disease_model.sav")
+# parkinson_model = joblib.load("models/parkinsons_model.sav")
 lung_cancer_model = joblib.load("models/lung_cancer_model.sav")
 breast_cancer_model = joblib.load("models/breast_cancer.sav")
 chronic_disease_model = joblib.load("models/chronic_model.sav")
 hepatitis_model = joblib.load("models/hepititisc_model.sav")
 liver_model = joblib.load("models/liver_model.sav")
+
+### new models
+diabetes_model = joblib.load("models/diabetes_prediction_decision_tree.sav")
+heart_model = joblib.load("models/heart_disease_prediction_svm.sav")
+parkinson_model = joblib.load("models/parkinsons_disease_prediction_rf.sav")
 
 @app.route('/api/diabetes', methods=['POST'])
 def predict_diabetes():

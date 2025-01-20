@@ -8,6 +8,7 @@ CORS(app)  # Enable CORS for all routes
 
 # Load all the pre-trained models
 diabetes_model = joblib.load("models/diabetes_model.sav")
+# diabetes_model = joblib.load("models/diabetes_prediction_decision_tree.sav")
 heart_model = joblib.load("models/heart_disease_model.sav")
 parkinson_model = joblib.load("models/parkinsons_model.sav")
 lung_cancer_model = joblib.load("models/lung_cancer_model.sav")
@@ -132,15 +133,15 @@ def predict_lung_cancer():
             data['YELLOW_FINGERS'],
             data['ANXIETY'],
             data['PEER_PRESSURE'],
-            data['CHRONICDISEASE'],
+            data['CHRONIC DISEASE'],
             data['FATIGUE'],
             data['ALLERGY'],
             data['WHEEZING'],
-            data['ALCOHOLCONSUMING'],
+            data['ALCOHOL CONSUMING'],
             data['COUGHING'],
-            data['SHORTNESSOFBREATH'],
-            data['SWALLOWINGDIFFICULTY'],
-            data['CHESTPAIN']
+            data['SHORTNESS OF BREATH'],
+            data['SWALLOWING DIFFICULTY'],
+            data['CHEST PAIN']
         ]
 
         prediction = lung_cancer_model.predict([input_data])
